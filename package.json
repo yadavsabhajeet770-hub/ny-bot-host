@@ -1,0 +1,1 @@
+{"name":"nybot-host","private":true,"workspaces":["server","client"],"scripts":{"build":"npm --workspace client run build && npm --workspace server run build","start":"npm --workspace server start"},"devDependencies":{"concurrently":"^9.2.1"}}

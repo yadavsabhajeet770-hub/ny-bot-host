@@ -1,0 +1,10 @@
+create extension if not exists pgcrypto;
+alter table public.projects add column if not exists telegram_bot_id bigint;
+alter table public.projects add column if not exists telegram_username text;
+alter table public.projects add column if not exists token_verified_at timestamptz;
+alter table public.projects add column if not exists render_service_id text;
+alter table public.projects add column if not exists render_service_url text;
+alter table public.projects add column if not exists last_error text;
+create table if not exists public.bot_tokens(project_id uuid primary key references public.projects(id) on delete cascade,token_encrypted text not null,token_last4 text not null,created_at timestamptz default now(),updated_at timestamptz default now());
+alter table public.bot_tokens enable row level security;
+revoke all on public.bot_tokens from anon,authenticated;
